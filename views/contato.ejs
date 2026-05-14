@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contato - Nutrivida</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<%- include('partials/navbar') %>
+
+<h1 style="padding: 20px;">Entre em contato:</h1>
+
+<div class="destaque-verde">
+  <p>Nossa equipe de especialistas está pronta para te ajudar!</p>
+  <p>Preencha o formulário abaixo para resposta mais rápida!</p>
+</div>
+
+<hr>
+
+<div class="form-container">
+  <h4>Informações de Contato:</h4>
+
+  <form id="form-contato">
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome"><br>
+
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email"><br>
+
+    <label for="telefone">Telefone:</label>
+    <input type="tel" id="telefone" name="telefone"><br>
+
+    <label for="mensagem">Mensagem:</label>
+    <textarea id="mensagem" name="mensagem" rows="5"></textarea><br>
+
+    <p id="msg-retorno" class="msg-retorno"></p>
+
+    <button type="submit" class="btn-verde">Enviar</button>
+    <button type="button" class="btn-cinza" onclick="history.back()">Voltar</button>
+  </form>
+</div>
+
+<%- include('partials/footer') %>
+
+<script>
+  // Envia o formulário via fetch (POST /contato)
+  const form = document.getElementById('form-contato');
+  const msgRetorno = document.getElementById('msg-retorno');
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const nome     = document.getElementById('nome').value.trim();
+    const email    = document.getElementById('email').value.trim();
+    const telefone = document.getElementById('telefone').value.trim();
+    const mensagem = document.getElementById('mensagem').value.trim();
+
+    // Validação simples no front
+    if (!nome || !email || !telefone || !mensagem) {
+      msgRetorno.textContent = 'Preencha todos os campos.';
+      msgRetorno.style.color = 'red';
+      return;
+    }
+
+    if (!email.includes('@') || !email.includes('.')) {
+      msgRetorno.textContent = 'Email inválido.';
+      msgRetorno.style.color = 'red';
+      return;
+    }
+
+    // Envia para o back-end via fetch
+    try {
+      const resposta = await fetch('/contato', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nome, email, telefone, mensagem })
+      });
+
+      const dados = await resposta.json();
+
+      if (resposta.ok) {
+        msgRetorno.textContent = dados.sucesso;
+        msgRetorno.style.color = 'green';
+        form.reset();
+      } else {
+        msgRetorno.textContent = dados.erro;
+        msgRetorno.style.color = 'red';
+      }
+    } catch (err) {
+      msgRetorno.textContent = 'Erro ao enviar. Tente novamente.';
+      msgRetorno.style.color = 'red';
+    }
+  });
+</script>
+
+</body>
+</html>

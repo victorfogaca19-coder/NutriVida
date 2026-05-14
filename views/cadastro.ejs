@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro - Nutrivida</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="pagina-form">
+
+<%- include('partials/navbar') %>
+
+<main class="conteudo-pagina">
+<div class="form-container">
+  <h1>Criar conta</h1>
+
+  <% if (erro) { %>
+    <p class="erro"><%= erro %></p>
+  <% } %>
+  <% if (sucesso) { %>
+    <p class="sucesso"><%= sucesso %></p>
+  <% } %>
+
+  <form id="form-cadastro">
+    <label for="nome">Nome completo:</label>
+    <input type="text" id="nome" name="nome" placeholder="Seu nome"><br>
+    <span class="msg-erro" id="erro-nome"></span>
+
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email" placeholder="seu@email.com"><br>
+    <span class="msg-erro" id="erro-email"></span>
+
+    <label for="senha">Senha:</label>
+    <input type="password" id="senha" name="senha" placeholder="Mínimo 6 caracteres"><br>
+    <span class="msg-erro" id="erro-senha"></span>
+
+    <button type="submit" class="btn-verde">Cadastrar</button>
+  </form>
+
+  <p>Já tem conta? <a href="/auth/login">Faça login</a></p>
+</div>
+
+</main>
+
+<%- include('partials/footer') %>
+
+<script>
+  // Validação no front antes de enviar via fetch
+  const form = document.getElementById('form-cadastro');
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    // Limpa erros anteriores
+    document.querySelectorAll('.msg-erro').forEach(el => el.textContent = '');
+
+    const nome  = document.getElementById('nome').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const senha = document.getElementById('senha').value.trim();
+
+    let temErro = false;
+
+    if (!nome) {
+      document.getElementById('erro-nome').textContent = 'Informe seu nome.';
+      temErro = true;
+    }
+    if (!email || !email.includes('@')) {
+      document.getElementById('erro-email').textContent = 'Email inválido.';
+      temErro = true;
+    }
+    if (senha.length < 6) {
+      document.getElementById('erro-senha').textContent = 'Senha deve ter no mínimo 6 caracteres.';
+      temErro = true;
+    }
+
+    if (temErro) return;
+
+    // Envia via fetch para o back-end
+    const res = await fetch('/auth/cadastro', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `nome=${encodeURIComponent(nome)}&email=${encodeURIComponent(email)}&senha=${encodeURIComponent(senha)}`
+    });
+
+    // Redireciona se deu certo (back retorna página EJS)
+    if (res.redirected) {
+      window.location.href = res.url;
+    } else {
+      const html = await res.text();
+      document.open();
+      document.write(html);
+      document.close();
+    }
+  });
+</script>
+
+</body>
+</html>

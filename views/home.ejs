@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home - Nutrivida</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<%- include('partials/navbar') %>
+
+<div class="carrossel">
+  <img src="/img/fazenda.png" class="ativa" alt="Fazenda urbana">
+  <img src="/img/urbana.jpg" alt="Fazenda urbana 2">
+</div>
+
+<div class="texto-principal">
+  <p>Bem-vindo ao Nutrivida. Aqui você vai encontrar as melhores soluções para sua fazenda urbana.</p>
+  <% if (!usuario) { %>
+    <a href="/auth/cadastro" class="btn-verde">Faça seu cadastro grátis</a>
+  <% } %>
+</div>
+
+<hr>
+
+<div class="secao-clara">
+  <h2>O que é a Nutrivida?</h2>
+  <p>
+    A Nutrivida é uma empresa que ajuda com soluções para fazendas urbanas da região de Barueri.
+    Apoiamos com tecnologia, conhecimento e inovação.
+  </p>
+</div>
+
+<div class="conteudo">
+  <div class="texto">
+    <h2>Como fazemos as fazendas urbanas prosperarem?</h2>
+    <p>
+      Consultoria para implementação <br>
+      Sistemas de automação e sensores <br>
+      Apoio na escolha de cultivo e layout <br>
+      Cursos e capacitações <br>
+      Suporte técnico
+    </p>
+  </div>
+  <div class="imagem">
+    <img src="/img/urbana.jpg" alt="Fazenda urbana">
+  </div>
+</div>
+
+<div class="secao-clara">
+  <h2>Como funciona o monitoramento?</h2>
+  <p>Nossa solução torna o cuidado com sua fazenda urbana mais eficiente, inteligente e sustentável.</p>
+  <figure>
+    <figcaption>Instalação de Sensores Inteligentes</figcaption>
+    <figcaption>Coleta e Transmissão de Dados</figcaption>
+    <figcaption>Plataforma de Monitoramento Online</figcaption>
+    <figcaption>Alertas e Recomendações Inteligentes</figcaption>
+  </figure>
+</div>
+
+<%- include('partials/footer') %>
+
+<script src="/js/home.js"></script>
+</body>
+</html>
