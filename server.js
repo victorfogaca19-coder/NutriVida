@@ -5,9 +5,9 @@ const MongoStore = require('connect-mongo');
 const path = require('path');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
-const MONGO_URI = 'mongodb://localhost:27017/nutrivida';
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/nutrivida';
 
 mongoose.connect(MONGO_URI)
   .then(() => console.log('MongoDB conectado!'))
