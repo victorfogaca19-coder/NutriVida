@@ -1,4 +1,3 @@
-// Carrossel de imagens
 let imagens = document.querySelectorAll('.carrossel img');
 let indice = 0;
 
@@ -11,7 +10,6 @@ function trocarImagem() {
 
 setInterval(trocarImagem, 3000);
 
-// Efeito hover nas figcaptions
 let captions = document.querySelectorAll('figcaption');
 
 captions.forEach(function(caption) {

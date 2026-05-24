@@ -45,7 +45,6 @@
 <%- include('partials/footer') %>
 
 <script>
-  // Envia o formulário via fetch (POST /contato)
   const form = document.getElementById('form-contato');
   const msgRetorno = document.getElementById('msg-retorno');
 
@@ -57,7 +56,6 @@
     const telefone = document.getElementById('telefone').value.trim();
     const mensagem = document.getElementById('mensagem').value.trim();
 
-    // Validação simples no front
     if (!nome || !email || !telefone || !mensagem) {
       msgRetorno.textContent = 'Preencha todos os campos.';
       msgRetorno.style.color = 'red';
@@ -70,7 +68,6 @@
       return;
     }
 
-    // Envia para o back-end via fetch
     try {
       const resposta = await fetch('/contato', {
         method: 'POST',

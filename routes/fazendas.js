@@ -2,13 +2,11 @@ const express = require('express');
 const router = express.Router();
 const Fazenda = require('../models/Fazenda');
 
-// Middleware: verifica se está logado
 function autenticado(req, res, next) {
   if (!req.session.usuario) return res.redirect('/auth/login');
   next();
 }
 
-// GET /fazendas — Lista todas as fazendas (página EJS)
 router.get('/', async (req, res) => {
   try {
     const fazendas = await Fazenda.find().sort({ criadoEm: -1 });
@@ -18,12 +16,10 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET /fazendas/nova — Formulário para cadastrar fazenda (requer login)
 router.get('/nova', autenticado, (req, res) => {
   res.render('fazenda-form', { fazenda: null, erro: null });
 });
 
-// POST /fazendas — Cadastra nova fazenda
 router.post('/', autenticado, async (req, res) => {
   const { nome, localizacao, tipo, descricao } = req.body;
 
@@ -43,7 +39,6 @@ router.post('/', autenticado, async (req, res) => {
   }
 });
 
-// GET /fazendas/api — Retorna todas as fazendas em JSON
 router.get('/api', async (req, res) => {
   try {
     const fazendas = await Fazenda.find().sort({ criadoEm: -1 });
@@ -53,7 +48,6 @@ router.get('/api', async (req, res) => {
   }
 });
 
-// GET /fazendas/api/:id — Retorna uma fazenda pelo ID
 router.get('/api/:id', async (req, res) => {
   try {
     const fazenda = await Fazenda.findById(req.params.id);
@@ -64,7 +58,6 @@ router.get('/api/:id', async (req, res) => {
   }
 });
 
-// PUT /fazendas/api/:id — Atualiza uma fazenda
 router.put('/api/:id', autenticado, async (req, res) => {
   try {
     const { nome, localizacao, tipo, descricao } = req.body;
@@ -80,7 +73,6 @@ router.put('/api/:id', autenticado, async (req, res) => {
   }
 });
 
-// DELETE /fazendas/api/:id — Remove uma fazenda
 router.delete('/api/:id', autenticado, async (req, res) => {
   try {
     await Fazenda.findByIdAndDelete(req.params.id);

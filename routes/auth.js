@@ -2,12 +2,10 @@ const express = require('express');
 const router = express.Router();
 const Usuario = require('../models/Usuario');
 
-// GET /auth/cadastro — Página de cadastro
 router.get('/cadastro', (req, res) => {
   res.render('cadastro', { erro: null, sucesso: null });
 });
 
-// POST /auth/cadastro — Cria novo usuário
 router.post('/cadastro', async (req, res) => {
   const { nome, email, senha } = req.body;
 
@@ -30,12 +28,10 @@ router.post('/cadastro', async (req, res) => {
   }
 });
 
-// GET /auth/login — Página de login
 router.get('/login', (req, res) => {
   res.render('login', { erro: null });
 });
 
-// POST /auth/login — Autentica usuário
 router.post('/login', async (req, res) => {
   const { email, senha } = req.body;
 
@@ -61,16 +57,14 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// GET /auth/logout — Encerra sessão
 router.get('/logout', (req, res) => {
   req.session.destroy();
   res.redirect('/');
 });
 
-// GET /api/usuarios — Lista usuários (rota REST)
 router.get('/usuarios', async (req, res) => {
   try {
-    const usuarios = await Usuario.find({}, '-senha'); // oculta senha
+    const usuarios = await Usuario.find({}, '-senha');
     res.json(usuarios);
   } catch (err) {
     res.status(500).json({ erro: 'Erro ao buscar usuários.' });

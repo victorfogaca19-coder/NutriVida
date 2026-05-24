@@ -45,13 +45,11 @@
 <%- include('partials/footer') %>
 
 <script>
-  // Validação no front antes de enviar via fetch
   const form = document.getElementById('form-cadastro');
 
   form.addEventListener('submit', async function(e) {
     e.preventDefault();
 
-    // Limpa erros anteriores
     document.querySelectorAll('.msg-erro').forEach(el => el.textContent = '');
 
     const nome  = document.getElementById('nome').value.trim();
@@ -75,14 +73,12 @@
 
     if (temErro) return;
 
-    // Envia via fetch para o back-end
     const res = await fetch('/auth/cadastro', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `nome=${encodeURIComponent(nome)}&email=${encodeURIComponent(email)}&senha=${encodeURIComponent(senha)}`
     });
 
-    // Redireciona se deu certo (back retorna página EJS)
     if (res.redirected) {
       window.location.href = res.url;
     } else {

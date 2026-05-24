@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-// GET /problemas — Página de problemas
 router.get('/', (req, res) => {
   const problemas = [
     {
@@ -39,7 +38,6 @@ router.get('/', (req, res) => {
   res.render('problemas', { problemas });
 });
 
-// GET /problemas/api — Retorna problemas em JSON (consumido pelo fetch)
 router.get('/api', (req, res) => {
   const problemas = [
     { id: 1, titulo: 'Crescimento Urbano', descricao: 'O crescimento da população urbana aumentou muito ao longo do tempo.' },

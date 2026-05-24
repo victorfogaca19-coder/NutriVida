@@ -18,14 +18,12 @@
   Entenda os principais desafios identificados no crescimento urbano de Barueri — clique em cada bloco para expandir.
 </div>
 
-<!-- Gráfico -->
 <div class="secao-clara" style="text-align:center;">
   <h2>Crescimento Urbano no Brasil</h2>
   <p style="text-align:center;">O gráfico abaixo ilustra a inversão entre populações urbana e rural ao longo das décadas, evidenciando os cinco grandes desafios que a Nutrivida atua para resolver.</p>
   <img src="/img/grafico.png" alt="Gráfico crescimento urbano" class="grafico-img">
 </div>
 
-<!-- Problemas em cards detalhados -->
 <div class="container-problemas">
 
   <div class="bloco-problema" id="problema1">
@@ -108,7 +106,6 @@
 <%- include('partials/footer') %>
 
 <script>
-  // Abre/fecha blocos e rotaciona a seta
   document.querySelectorAll('.bloco-problema').forEach(function(bloco) {
     bloco.addEventListener('click', function() {
       const descricao = bloco.querySelector('.descricao');
@@ -129,7 +126,6 @@
     });
   });
 
-  // Ao chegar via ancora (#problemaN), abre automaticamente e rola suave
   function abrirPorAncora() {
     const hash = window.location.hash;
     if (!hash) return;

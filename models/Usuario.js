@@ -8,14 +8,12 @@ const usuarioSchema = new mongoose.Schema({
   criadoEm: { type: Date, default: Date.now }
 });
 
-// Criptografa a senha antes de salvar
 usuarioSchema.pre('save', async function (next) {
   if (!this.isModified('senha')) return next();
   this.senha = await bcrypt.hash(this.senha, 10);
   next();
 });
 
-// Compara senha digitada com a salva
 usuarioSchema.methods.verificarSenha = async function (senha) {
   return bcrypt.compare(senha, this.senha);
 };

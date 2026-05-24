@@ -7,14 +7,12 @@ const path = require('path');
 const app = express();
 const PORT = 3000;
 
-// ── Conexão MongoDB ──────────────────────────────────────────────
 const MONGO_URI = 'mongodb://localhost:27017/nutrivida';
 
 mongoose.connect(MONGO_URI)
   .then(() => console.log('MongoDB conectado!'))
   .catch(err => console.log('Erro MongoDB:', err));
 
-// ── Configurações ────────────────────────────────────────────────
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
@@ -27,16 +25,14 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({ mongoUrl: MONGO_URI }),
-  cookie: { maxAge: 1000 * 60 * 60 * 24 } // 1 dia
+  cookie: { maxAge: 1000 * 60 * 60 * 24 }
 }));
 
-// Middleware: passa o usuário logado para todas as views
 app.use((req, res, next) => {
   res.locals.usuario = req.session.usuario || null;
   next();
 });
 
-// ── Rotas ────────────────────────────────────────────────────────
 const rotasHome      = require('./routes/home');
 const rotasAuth      = require('./routes/auth');
 const rotasContato   = require('./routes/contato');
@@ -49,7 +45,6 @@ app.use('/contato',   rotasContato);
 app.use('/problemas', rotasProblemas);
 app.use('/fazendas',  rotasFazendas);
 
-// ── Inicia servidor ──────────────────────────────────────────────
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
 });

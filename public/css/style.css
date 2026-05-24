@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap');
 
-/* ── Reset básico ── */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
@@ -9,7 +8,6 @@ body {
   color: #2c2c2c;
 }
 
-/* ── Layout sticky footer ── */
 .pagina-fazendas,
 .pagina-form {
   display: flex;
@@ -27,7 +25,6 @@ body {
   margin-top: 0;
 }
 
-/* ── Navbar ── */
 .navbar {
   background: linear-gradient(135deg, #1b4d1b 0%, #2e6d2e 60%, #3d8b3d 100%);
   display: flex;
@@ -78,7 +75,6 @@ body {
   font-weight: bold;
 }
 
-/* ── Dropdown navbar ── */
 .nav-dropdown {
   position: relative;
 }
@@ -160,7 +156,6 @@ body {
   display: block;
 }
 
-/* ── Blocos de problema (com header interno) ── */
 .bloco-header {
   display: flex;
   align-items: flex-start;
@@ -201,7 +196,6 @@ body {
   line-height: 1.75;
 }
 
-/* ── Imagem do gráfico ── */
 .grafico-img {
   max-width: 620px;
   width: 100%;
@@ -211,7 +205,6 @@ body {
   margin: 12px 0 4px;
 }
 
-/* ── Footer ── */
 .footer {
   background: linear-gradient(135deg, #1b4d1b 0%, #2e6d2e 60%, #3d8b3d 100%);
   padding: 24px 32px;
@@ -240,7 +233,6 @@ body {
 
 .icons a:hover { color: #ffffff; }
 
-/* ── Carrossel ── */
 .carrossel {
   width: 100%;
   height: 420px;
@@ -270,7 +262,6 @@ body {
 
 .carrossel img.ativa { display: block; }
 
-/* ── Textos e seções ── */
 .texto-principal {
   background: linear-gradient(135deg, #2e6d2e 0%, #3d8b3d 50%, #4a9a4a 100%);
   padding: 32px 28px;
@@ -370,7 +361,6 @@ figcaption:hover {
   transform: translateX(4px);
 }
 
-/* ── Botões ── */
 .btn-verde {
   display: inline-block;
   background: linear-gradient(135deg, #2e6d2e, #4a9a4a);
@@ -429,7 +419,6 @@ figcaption:hover {
 
 .btn-perigo:hover { background-color: #a93226; }
 
-/* ── Formulários ── */
 .form-container {
   max-width: 520px;
   margin: 36px auto;
@@ -474,7 +463,6 @@ input:focus, select:focus, textarea:focus {
 
 textarea { resize: vertical; }
 
-/* ── Mensagens de erro/sucesso ── */
 .erro {
   color: #c0392b;
   font-weight: bold;
@@ -499,7 +487,6 @@ textarea { resize: vertical; }
   margin: 8px 0;
 }
 
-/* ── Páginas de conteúdo ── */
 .titulo-pagina {
   padding: 28px 28px 12px;
   display: flex;
@@ -553,9 +540,6 @@ textarea { resize: vertical; }
   transform: translateX(4px);
 }
 
-/* ── Sobre Nós ── */
-
-/* Bloco de origem (topo da página) */
 .sobre-origem {
   background: linear-gradient(135deg, #1b4d1b 0%, #2e6d2e 55%, #3d8b3d 100%);
   padding: 48px 28px;
@@ -582,7 +566,6 @@ textarea { resize: vertical; }
   font-size: 16px;
 }
 
-/* Grid do time */
 .secao-time {
   padding: 48px 28px 40px;
   text-align: center;
@@ -726,7 +709,6 @@ textarea { resize: vertical; }
 .porque h3 { padding: 0 0 14px; color: #1b4d1b; font-family: 'Playfair Display', serif; }
 .porque p { padding: 0 0 8px; color: #2c4a2c; }
 
-/* ── Fazendas Atendidas ── */
 .secao-atendidas {
   padding: 12px 28px 40px;
 }
@@ -844,7 +826,6 @@ textarea { resize: vertical; }
   border: 1px solid #b8d8a8;
 }
 
-/* ── Responsivo ── */
 @media (max-width: 768px) {
   .navbar { flex-direction: column; align-items: flex-start; }
   .conteudo { flex-direction: column; }
