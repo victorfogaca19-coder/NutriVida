@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Problemas - Nutrivida</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<%- include('partials/navbar') %>
+
+<div class="titulo-pagina">
+  <h1>Problemas das Fazendas Urbanas</h1>
+</div>
+
+<div class="subtitulo">
+  Entenda os principais desafios identificados no crescimento urbano de Barueri — clique em cada bloco para expandir.
+</div>
+
+<div class="secao-clara" style="text-align:center;">
+  <h2>Crescimento Urbano no Brasil</h2>
+  <p style="text-align:center;">O gráfico abaixo ilustra a inversão entre populações urbana e rural ao longo das décadas, evidenciando os cinco grandes desafios que a Nutrivida atua para resolver.</p>
+  <img src="/img/grafico.png" alt="Gráfico crescimento urbano" class="grafico-img">
+</div>
+
+<div class="container-problemas">
+
+  <div class="bloco-problema" id="problema1">
+    <div class="bloco-header">
+      <span class="bloco-icone">🏙️</span>
+      <div>
+        <h2>Crescimento Urbano</h2>
+        <p class="resumo">Como o êxodo rural impacta a produção de alimentos nas cidades?</p>
+      </div>
+      <span class="bloco-seta">›</span>
+    </div>
+    <div class="descricao">
+      <p>A população urbana do Brasil ultrapassou 87% do total em 2020, segundo dados do IBGE. Esse crescimento acelerado pressiona a infraestrutura das cidades e cria uma demanda crescente por alimentos produzidos localmente. Em Barueri, o fenômeno é ainda mais intenso com o crescimento do Alphaville e regiões adjacentes.</p>
+      <p>A Nutrivida atua justamente nesse contexto, oferecendo tecnologia e consultoria para que pequenos e médios produtores urbanos consigam se estruturar e suprir essa demanda de forma eficiente.</p>
+    </div>
+  </div>
+
+  <div class="bloco-problema" id="problema2">
+    <div class="bloco-header">
+      <span class="bloco-icone">🌾</span>
+      <div>
+        <h2>Menos Espaço Rural</h2>
+        <p class="resumo">O campo encolhe — e a cidade precisa produzir mais.</p>
+      </div>
+      <span class="bloco-seta">›</span>
+    </div>
+    <div class="descricao">
+      <p>Com a migração massiva para as cidades, o número de trabalhadores rurais caiu drasticamente. Isso reduz a capacidade de produção tradicional, encarece o transporte de alimentos e aumenta a dependência de cadeias longas de abastecimento, que são mais frágeis e menos sustentáveis.</p>
+      <p>Fazer o cultivo chegar mais perto do consumidor final é uma das missões centrais das fazendas urbanas apoiadas pela Nutrivida.</p>
+    </div>
+  </div>
+
+  <div class="bloco-problema" id="problema3">
+    <div class="bloco-header">
+      <span class="bloco-icone">🥬</span>
+      <div>
+        <h2>Produção de Alimentos</h2>
+        <p class="resumo">Produzir mais, em menos espaço, com mais qualidade.</p>
+      </div>
+      <span class="bloco-seta">›</span>
+    </div>
+    <div class="descricao">
+      <p>O principal desafio técnico das fazendas urbanas é otimizar a produção em áreas reduzidas. Técnicas como hidroponia, aeroponia e cultivo vertical permitem produzir até 10 vezes mais por m² comparado ao campo tradicional, mas exigem conhecimento especializado, equipamentos adequados e monitoramento contínuo.</p>
+      <p>A Nutrivida oferece consultoria completa desde a escolha da técnica de cultivo até a configuração dos sistemas de automação.</p>
+    </div>
+  </div>
+
+  <div class="bloco-problema" id="problema4">
+    <div class="bloco-header">
+      <span class="bloco-icone">💧</span>
+      <div>
+        <h2>Uso de Recursos</h2>
+        <p class="resumo">Água, energia e nutrientes precisam ser monitorados em tempo real.</p>
+      </div>
+      <span class="bloco-seta">›</span>
+    </div>
+    <div class="descricao">
+      <p>Sem monitoramento inteligente, fazendas urbanas podem desperdiçar até 40% dos recursos utilizados. Sensores de umidade, temperatura, pH e condutividade elétrica são fundamentais para garantir que as plantas recebam exatamente o que precisam — nem mais, nem menos.</p>
+      <p>A plataforma de monitoramento da Nutrivida integra todos esses sensores em um único painel, com alertas em tempo real e recomendações automáticas para os produtores.</p>
+    </div>
+  </div>
+
+  <div class="bloco-problema" id="problema5">
+    <div class="bloco-header">
+      <span class="bloco-icone">♻️</span>
+      <div>
+        <h2>Sustentabilidade</h2>
+        <p class="resumo">Produzir mais sem destruir o meio ambiente — o maior desafio do século.</p>
+      </div>
+      <span class="bloco-seta">›</span>
+    </div>
+    <div class="descricao">
+      <p>As fazendas urbanas bem gerenciadas podem reduzir em até 90% o uso de água em comparação ao cultivo convencional, eliminar o uso de agrotóxicos e diminuir drasticamente a pegada de carbono pela proximidade com o consumidor. Porém, atingir esse nível exige investimento, conhecimento e acompanhamento técnico constante.</p>
+      <p>A Nutrivida apoia produtores de Barueri a alcançar esse padrão com planos acessíveis, formação continuada e suporte técnico especializado.</p>
+    </div>
+  </div>
+
+</div>
+
+<%- include('partials/footer') %>
+
+<script>
+  document.querySelectorAll('.bloco-problema').forEach(function(bloco) {
+    bloco.addEventListener('click', function() {
+      const descricao = bloco.querySelector('.descricao');
+      const seta = bloco.querySelector('.bloco-seta');
+      const aberto = bloco.classList.contains('ativo');
+
+      document.querySelectorAll('.bloco-problema').forEach(function(b) {
+        b.querySelector('.descricao').style.display = 'none';
+        b.querySelector('.bloco-seta').style.transform = 'rotate(0deg)';
+        b.classList.remove('ativo');
+      });
+
+      if (!aberto) {
+        descricao.style.display = 'block';
+        seta.style.transform = 'rotate(90deg)';
+        bloco.classList.add('ativo');
+      }
+    });
+  });
+
+  function abrirPorAncora() {
+    const hash = window.location.hash;
+    if (!hash) return;
+    const alvo = document.querySelector(hash);
+    if (!alvo) return;
+    alvo.click();
+    setTimeout(function() {
+      alvo.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 80);
+  }
+
+  window.addEventListener('load', abrirPorAncora);
+  window.addEventListener('hashchange', abrirPorAncora);
+</script>
+
+</body>
+</html>

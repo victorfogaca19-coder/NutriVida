@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mensagens - Nutrivida</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<%- include('partials/navbar') %>
+
+<div class="titulo-pagina">
+  <h1>Mensagens Recebidas</h1>
+  <p>Total: <strong><%= mensagens.length %></strong> mensagem(s)</p>
+</div>
+
+<div class="container-problemas">
+  <% if (mensagens.length === 0) { %>
+    <p>Nenhuma mensagem recebida ainda.</p>
+  <% } %>
+
+  <% mensagens.forEach(function(msg) { %>
+    <div class="bloco-problema" id="msg-<%= msg._id %>">
+      <h2><%= msg.nome %></h2>
+      <p><strong>Email:</strong> <%= msg.email %></p>
+      <p><strong>Telefone:</strong> <%= msg.telefone %></p>
+      <p><strong>Mensagem:</strong> <%= msg.mensagem %></p>
+      <p><small>Recebido em: <%= new Date(msg.criadoEm).toLocaleDateString('pt-BR') %></small></p>
+      <button class="btn-perigo" onclick="deletarMensagem('<%= msg._id %>')">Remover</button>
+    </div>
+  <% }) %>
+</div>
+
+<%- include('partials/footer') %>
+
+<script>
+  async function deletarMensagem(id) {
+    if (!confirm('Deseja remover esta mensagem?')) return;
+
+    try {
+      const res = await fetch('/contato/' + id, { method: 'DELETE' });
+      const dados = await res.json();
+
+      if (res.ok) {
+        document.getElementById('msg-' + id).remove();
+      } else {
+        alert(dados.erro);
+      }
+    } catch (err) {
+      alert('Erro ao remover.');
+    }
+  }
+</script>
+
+</body>
+</html>

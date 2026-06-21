@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nova Fazenda - Nutrivida</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<%- include('partials/navbar') %>
+
+<div class="form-container">
+  <h1>Cadastrar Fazenda Urbana</h1>
+
+  <% if (erro) { %>
+    <p class="erro"><%= erro %></p>
+  <% } %>
+
+  <form id="form-fazenda">
+    <label for="nome">Nome da fazenda: *</label>
+    <input type="text" id="nome" name="nome" placeholder="Ex: Fazenda Verde Barueri"><br>
+    <span class="msg-erro" id="erro-nome"></span>
+
+    <label for="localizacao">Localização: *</label>
+    <input type="text" id="localizacao" name="localizacao" placeholder="Ex: Barueri, SP"><br>
+    <span class="msg-erro" id="erro-local"></span>
+
+    <label for="tipo">Tipo: *</label>
+    <select id="tipo" name="tipo">
+      <option value="">Selecione...</option>
+      <option value="Hidropônica">Hidropônica</option>
+      <option value="Vertical">Vertical</option>
+      <option value="Convencional">Convencional</option>
+      <option value="Aquapônica">Aquapônica</option>
+      <option value="Outro">Outro</option>
+    </select><br>
+    <span class="msg-erro" id="erro-tipo"></span>
+
+    <label for="descricao">Descrição (opcional):</label>
+    <textarea id="descricao" name="descricao" rows="4" placeholder="Descreva sua fazenda..."></textarea><br>
+
+    <button type="submit" class="btn-verde">Cadastrar</button>
+    <a href="/fazendas" class="btn-cinza" style="display:inline-block; padding: 8px 16px; text-decoration:none;">Cancelar</a>
+  </form>
+</div>
+
+<%- include('partials/footer') %>
+
+<script>
+  const form = document.getElementById('form-fazenda');
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    document.querySelectorAll('.msg-erro').forEach(el => el.textContent = '');
+
+    const nome       = document.getElementById('nome').value.trim();
+    const localizacao= document.getElementById('localizacao').value.trim();
+    const tipo       = document.getElementById('tipo').value;
+    const descricao  = document.getElementById('descricao').value.trim();
+
+    let temErro = false;
+
+    if (!nome) {
+      document.getElementById('erro-nome').textContent = 'Informe o nome da fazenda.';
+      temErro = true;
+    }
+    if (!localizacao) {
+      document.getElementById('erro-local').textContent = 'Informe a localização.';
+      temErro = true;
+    }
+    if (!tipo) {
+      document.getElementById('erro-tipo').textContent = 'Selecione o tipo.';
+      temErro = true;
+    }
+    if (temErro) return;
+
+    const res = await fetch('/fazendas', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `nome=${encodeURIComponent(nome)}&localizacao=${encodeURIComponent(localizacao)}&tipo=${encodeURIComponent(tipo)}&descricao=${encodeURIComponent(descricao)}`
+    });
+
+    if (res.redirected) {
+      window.location.href = res.url;
+    } else {
+      const html = await res.text();
+      document.open();
+      document.write(html);
+      document.close();
+    }
+  });
+</script>
+
+</body>
+</html>

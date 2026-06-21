@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls ~/.config/gh/ 2>/dev/null || echo \"diretório não existe\")",
+      "Read(//Users/victorfogaca/.config/**)"
+    ]
+  }
+}

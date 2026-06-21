@@ -1,0 +1,45 @@
+<nav class="navbar">
+  <div class="logo">NUTRIVIDA</div>
+  <div class="icone">
+    <a href="/">Home</a>
+
+    <div class="nav-dropdown">
+      <a href="/problemas" class="nav-dropdown-toggle">Problemas ▾</a>
+      <div class="nav-dropdown-menu">
+        <div class="nav-dropdown-inner">
+          <a href="/problemas#problema1">
+            <span>Crescimento Urbano</span>
+            <span class="seta">›</span>
+          </a>
+          <a href="/problemas#problema2">
+            <span>Menos Espaço Rural</span>
+            <span class="seta">›</span>
+          </a>
+          <a href="/problemas#problema3">
+            <span>Produção de Alimentos</span>
+            <span class="seta">›</span>
+          </a>
+          <a href="/problemas#problema4">
+            <span>Uso de Recursos</span>
+            <span class="seta">›</span>
+          </a>
+          <a href="/problemas#problema5">
+            <span>Sustentabilidade</span>
+            <span class="seta">›</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <a href="/fazendas">Fazendas</a>
+    <a href="/sobre">Sobre Nós</a>
+    <a href="/contato">Contato</a>
+    <% if (usuario) { %>
+      <span class="usuario-logado">Olá, <%= usuario.nome.split(' ')[0] %></span>
+      <a href="/auth/logout">Sair</a>
+    <% } else { %>
+      <a href="/auth/login">Login</a>
+      <a href="/auth/cadastro">Cadastrar</a>
+    <% } %>
+  </div>
+</nav>

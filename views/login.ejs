@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Nutrivida</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="pagina-form">
+
+<%- include('partials/navbar') %>
+
+<main class="conteudo-pagina">
+<div class="form-container">
+  <h1>Entrar</h1>
+
+  <% if (erro) { %>
+    <p class="erro"><%= erro %></p>
+  <% } %>
+
+  <form id="form-login">
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email" placeholder="seu@email.com"><br>
+    <span class="msg-erro" id="erro-email"></span>
+
+    <label for="senha">Senha:</label>
+    <input type="password" id="senha" name="senha" placeholder="Sua senha"><br>
+    <span class="msg-erro" id="erro-senha"></span>
+
+    <button type="submit" class="btn-verde">Entrar</button>
+  </form>
+
+  <p>Não tem conta? <a href="/auth/cadastro">Cadastre-se</a></p>
+</div>
+
+</main>
+
+<%- include('partials/footer') %>
+
+<script>
+  const form = document.getElementById('form-login');
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    document.querySelectorAll('.msg-erro').forEach(el => el.textContent = '');
+
+    const email = document.getElementById('email').value.trim();
+    const senha = document.getElementById('senha').value.trim();
+    let temErro = false;
+
+    if (!email || !email.includes('@')) {
+      document.getElementById('erro-email').textContent = 'Email inválido.';
+      temErro = true;
+    }
+    if (!senha) {
+      document.getElementById('erro-senha').textContent = 'Informe a senha.';
+      temErro = true;
+    }
+    if (temErro) return;
+
+    const res = await fetch('/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `email=${encodeURIComponent(email)}&senha=${encodeURIComponent(senha)}`
+    });
+
+    if (res.redirected) {
+      window.location.href = res.url;
+    } else {
+      const html = await res.text();
+      document.open();
+      document.write(html);
+      document.close();
+    }
+  });
+</script>
+
+</body>
+</html>
